@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'massadv',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,9 +65,11 @@ DATABASES = {
         'PASSWORD': os.environ.get("MYAPP_DB_PASSWORD", ''),
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
+        'OPTIONS': {
+            "init_command": "SET storage_engine=INNODB",
+        } 
     }
 }
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
