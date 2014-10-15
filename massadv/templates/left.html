@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>Fred's Auction Gallery Menu</TITLE></TEST>
+<LINK REL="stylesheet" TYPE="text/css" HREF="{{ STATIC_URL }}menu.css">
+</HEAD>
+<BODY TOPMARGIN="0" LEFTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0">
+<FORM METHOD=POST TARGET="main" ACTION="/cgi-bin/st_items.pl">Find Item #<BR>
+<INPUT TYPE=TEXT SIZE=6 MAXLENGTH=6 NAME="item" VALUE="">
+<INPUT TYPE=SUBMIT NAME=SUBMIT VALUE="Go">
+</FORM>
+<BR>
+<H1>Category</H1>
+<TABLE>
+
+{% if categories %}
+{% for cat in categories %}
+<TR>
+<TD>
+<A HREF="/category/{{ cat.id }}" TARGET="main">{{ cat.name }}</A>
+</TD>
+</TR>
+{% endfor %}
+{% else %}
+<TR>
+<TD>
+No Items Listed
+</TD>
+</TR>
+{% endif %}
+</TABLE>
+</BODY>
+</HTML>
+

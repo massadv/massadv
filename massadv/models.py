@@ -1,7 +1,6 @@
 from django.db import models
-from django import forms
 
-class StUsers(models.Model):
+class Users(models.Model):
     username = models.CharField(db_index=True, max_length=32, blank=False)
     password = models.CharField(max_length=32, blank=False)
     firstname = models.CharField(db_index=True, max_length=32, blank=False)
@@ -15,7 +14,8 @@ class StUsers(models.Model):
     state = models.CharField(blank=False, max_length=2)
     country = models.CharField(blank=False, max_length=80)
     zipcode = models.CharField(blank=False, max_length=10)
-
+    rating = models.IntegerField(default=0);
+    
     def __unicode__(self):
         msg = u'Username: ' + self.username + "\n"
         #msg += 'Password: ' + self.password + "\n"
@@ -31,36 +31,50 @@ class StUsers(models.Model):
         #msg += 'Country: ' + self.zipcode + '\n'        
         return msg
     
-class StItems(models.Model):
+class Items(models.Model):
+    user = models.ForeignKey(Users)
     title = models.CharField(db_index=True, blank=False, max_length=128)
-    consignor = models.ForeignKey(StUsers)
-    price = models.IntegerField(default=0)
     description = models.TextField(blank=False)
-    state = models.IntegerField(default=0)
+    startprice = models.IntegerField(default=0)
+    endprice = models.IntegerField(default=0)
+    currentprice = models.IntegerField(default=0)
+    daysleft = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
-    days = models.IntegerField(default=0)
+    sold = models.BooleanField(default=False)
+    expired = models.BooleanField(default=False)
     startdate = models.DateTimeField()
     enddate = models.DateTimeField()
         
     def __unicode__(self):
         msg = u'Title: ' + self.title + '\n'
-        msg += '---Price: $' + self.price.__str__() + '\n'
+        msg += '---StartPrice: $' + self.startprice.__str__() + '\n'
+        msg += '---EndPrice: $' + self.endprice.__str__() + '\n'
         #msg += 'Description: ' + self.description + '\n'
         #msg += 'State: ' + self.state.__str__() + '\n'
         #msg += 'Featured: ' + self.featured.__str__() + '\n'
-        #msg += 'Days: ' + self.days.__str__() + '\n'
+        #msg += 'Sold: ' + self.sold.__str__() + '\n'
+        #msg += 'Expired: ' + self.expired.__str__() + '\n'
+        #msg += 'Daysleft: ' + self.days.__str__() + '\n'
         #msg += 'Startdate: ' + self.startdate.__str__() + '\n'
         #msg += 'Enddate: ' + self.enddate.__str__() + '\n'
         return msg
 
-class StImages(models.Model):
-    item = models.ForeignKey(StItems)
+class Claim(models.Model):
+    user = models.ForeignKey(Users)
+    item = models.ForeignKey(Items)
+    price = models.IntegerField(default=0)
+    
+    def __unicode__(self):
+        return self.user.__str__() + " / " + self.item.__str__()
+
+class Images(models.Model):
+    item = models.ForeignKey(Items)
     image = models.ImageField(blank=False)
     
     def __unicode__(self):
         return 'Image: ' + self.image.__str__()
             
-class StCategories(models.Model):
+class Categories(models.Model):
     name = models.CharField(max_length=32, blank=False)
 
     def __unicode__(self):
@@ -69,9 +83,9 @@ class StCategories(models.Model):
     class Meta: ordering = ['name']
 
 
-class StCat(models.Model):
-    category = models.ForeignKey(StCategories)
-    item = models.ForeignKey(StItems)
+class Cat(models.Model):
+    category = models.ForeignKey(Categories)
+    item = models.ForeignKey(Items)
     
     def __unicode__(self):
-        return self.category.__str__() + " / " + self.item.__str__()
+        return "Claim: "  + self.category.__str__() + " / " + self.item.__str__()

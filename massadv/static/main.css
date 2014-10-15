@@ -1,0 +1,113 @@
+A:link{color: #0000FF;}
+A:active{color: #0000FF;}
+A:visited{color: #0000FF;}
+
+BODY, TABLE, H1, H2, H3 {text-align:center; vertical-align:top; background:#FFFFFF;}
+
+P {
+	color:black; 
+	font:12pt Helvetica; 
+	background:#FFFFFF; 
+	text-align:center; 
+	vertical-align:top;
+}
+
+div.leftside {
+	   font:16pt Helvetica; 
+	   text-align:left; 
+	   color:#333333;
+}
+
+H1 {color:#CC0000; font:18pt Helvetica;}
+H2 {color:#0000CC; font:14pt Helvetica;}
+H3 {color:#CC0000; font:20pt Helvetica;}
+
+TABLE.center1{ 
+	       margin-left: auto;
+	       margin-right: auto;
+}
+ 
+DIV.center2{ 
+	     text-align: center;
+}
+
+TD {	
+	color:#000099;
+	font:8pt Helvetica; 
+	font-weight:bold; 	
+	background:#CCCCCC;
+}
+
+
+TD.img {	
+       	text-align:center;	
+	vertical-align:middle;
+	background:#FFFFFF;
+	font:8pt Helvetica; 
+}
+
+TD.left {
+	vertical-align:middle;
+	 text-align:left;		
+	background:#FFFFFF;
+}
+
+TD.outer {
+	vertical-align:top;
+	 text-align:center;		
+	background:#FFFFFF;
+}
+
+TD.main_1 {
+	font:9pt Helvetica;
+	color:#000099; 
+	vertical-align:top;
+	text-align:justify;		
+	background:#FFFFFF;
+}
+
+
+TD.desc {	
+	color: #000099;
+	font-weight:normal;
+	background:#FFFFFF;
+	text-align:left;
+	vertical-align:top;	
+}
+
+TD.price {
+	vertical-align:middle;	
+	text-align:center;			
+	color:#CC0000;
+}
+
+TD.blank {
+	vertical-align:middle;
+	text-align:center;		
+	background:#FFFFFF;
+}
+
+TD.error {
+	vertical-align:middle;
+	text-align:center;		
+	color:blue;
+	font:18pt Helvetica; 
+	background:#FFFFFF;
+}
+
+TH {
+   color:#0000CC;
+   background:#CCCCCC;
+}  
+
+TH.danger {
+   color:000000;
+   background:#FF0000;
+}  
+
+TH.admin {
+   color:000000;
+   background:#FFFFCC;
+}  
+
+

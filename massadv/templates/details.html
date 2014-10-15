@@ -1,0 +1,113 @@
+#!/usr/local/bin/perl
+
+use DBI;
+use Carp;
+use strict;
+use CGI_Lite;
+
+# Dump the headers
+print "Content-type: text/html\n\n";
+
+# Database locals
+my $database = "ftous_auction"; 
+my $data_source = "dbi:mysql";
+my $user = "ftous"; 
+my $passwd = 'G3EVb47E';
+
+my $hostname;
+if($ENV{SERVER_NAME} =~ /localhost/){
+  $hostname = 'localhost';
+}else{
+  $hostname = 'db14.pair.com';
+}
+
+my ($statement, $sth, $dbh);
+my @row;
+
+# Connect to our database.
+eval {
+  $dbh = DBI->connect("$data_source:$database:$hostname", $user, $passwd,{ RaiseError => 1});
+};
+
+if($@){
+  dump_error_page("Cannot currently connect to our Auction Database.  Please retry.");
+  exit;
+}
+
+my $cgi = new CGI_Lite;
+$cgi->set_platform ('Unix');
+my %parsed = $cgi->parse_form_data;
+
+# See what action we're working on
+my $id = $parsed{id} || &dump_error_page("No Input");
+
+$statement = qq(select description,img1,img2,img3,img4,img5 from st_items where id = '$id');
+$sth = $dbh->prepare($statement) or &dump_error_page("Database Error : 1");
+$sth->execute or &dump_error_page("Database Error : 1");
+
+my($description,$img1,$img2,$img3,$img4,$img5) = $sth->fetchrow_array;
+
+print <<PAGE;
+
+<HTML>
+<HEAD>
+<TITLE></TITLE></TEST>
+<LINK REL="stylesheet" TYPE="text/css" HREF="{{ STATIC_URL }}main.css">
+</HEAD>
+<BODY>
+<H1> Item \#$id</H1>
+<DIV CLASS="center2">
+<TABLE CLASS="center1" CELLSPACING=5 CELLPADDING=5 BORDER=0 WIDTH="100%">
+
+PAGE
+
+$description =~ s/\n/<BR>/g;
+print qq(<TR><TD WIDTH="20%" CLASS="outer">&nbsp;</TD><TD WIDTH="60%" CLASS="desc">Full Description:<BR><BR>$description</TD><TD WIDTH="20%" CLASS="outer">&nbsp;</TD></TR>\n) if($img1);
+print qq(<TR><TD WIDTH="20%" CLASS="outer">&nbsp;</TD><TD CLASS="outer">Photo 1<BR><IMG SRC="/pictures/$img1" BORDER=0></TD><TD WIDTH="20%" CLASS="outer">&nbsp;</TD></TR>\n) if($img1);
+print qq(<TR><TD WIDTH="20%" CLASS="outer">&nbsp;</TD><TD CLASS="outer">Photo 2<BR><IMG SRC="/pictures/$img2" BORDER=0></TD><TD WIDTH="20%" CLASS="outer">&nbsp;</TD></TR>\n) if($img2);
+print qq(<TR><TD WIDTH="20%" CLASS="outer">&nbsp;</TD><TD CLASS="outer">Photo 3<BR><IMG SRC="/pictures/$img3" BORDER=0></TD><TD WIDTH="20%" CLASS="outer">&nbsp;</TD></TR>\n) if($img3);
+print qq(<TR><TD WIDTH="20%" CLASS="outer">&nbsp;</TD><TD CLASS="outer">Photo 4<BR><IMG SRC="/pictures/$img4" BORDER=0></TD><TD WIDTH="20%" CLASS="outer">&nbsp;</TD></TR>\n) if($img4);
+print qq(<TR><TD WIDTH="20%" CLASS="outer">&nbsp;</TD><TD CLASS="outer">Photo 5<BR><IMG SRC="/pictures/$img5" BORDER=0></TD><TD WIDTH="20%" CLASS="outer">&nbsp;</TD></TR>\n) if($img5);
+
+print <<PAGE;
+</TABLE>
+</DIV>
+</BODY>
+</HTML>
+PAGE
+
+
+#####################################################
+# dump_error_page()
+#####################################################
+sub dump_error_page{
+
+  my $error = shift;
+
+  print <<EOF;
+
+<HTML>
+<HEAD>
+<TITLE>Error Page</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="{{ STATIC_URL }}main.css">
+</HEAD>
+<BODY TOPMARGIN="0" LEFTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0" bgcolor="#FFFFFF">
+<BR><BR>
+<H2>Database Error</H2>
+Contact Us
+<BR>
+With Details
+</BODY></HTML>
+EOF
+
+  croak "$error";
+
+}
+
+
+
+
+
+
+
+

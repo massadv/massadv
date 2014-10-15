@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>Fred's Virtual Consignment</TITLE></TEST>
+<LINK REL="stylesheet" TYPE="text/css" HREF="{{ STATIC_URL }}main.css">
+</HEAD>
+<BODY TOPMARGIN="0" LEFTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0">
+
+<P>
+<BR>
+<H1> Welcome to MassAdvertiser.com </H1>
+<TABLE WIDTH="100%" BORDER=0 CELLSPACING=2 CELLPADDING=2>
+<TR><TD COLSPAN=3 class="main_1">
+Our new MassAdvertiser Virtual Co-op is offered to our valued customers and consigners as a convenient alternative to our popular 
+<A HREF="http://www.auctionbyemail.com" target="new">AuctionByEmail</A> format.
+Here, buyers and sellers alike can purchase and list great items without the uncertainty that comes with the auction process. At the 
+Virtual Co-op, buyers can still get great deals on quality items and consigners can list and sell their items at a price they 
+feel is fair.
+<BR><BR>
+You will also find valuable leads in our &quot;Dealer Specialty&quot; category where dealers who specialize in specific areas will
+feature items for sale each month and will offer their expertise for buying and selling items in their field. Our directory can 
+also help you find professional assistance in many service areas (see &quot;Services&quot;), other sales events or
+places to shop (see &quot;Events&quot;), and even great places to dine-out (see &quot;Food&quot;).
+<BR><BR>
+We hope this internet directory will create a unique co-op network to help you enjoy the finer things in life.
+
+</TD></TR>
+
+<TR><TD COLSPAN=3 HEIGHT="20" class="main_1"></TD></TR>
+
+<TR>
+<TD WIDTH="25%" class="main_1">
+<A HREF="/buy.html" TARGET="main">Buyers</A>, feel free to browse around at the items we currently have listed. You can browse by category 
+or browse them all at once by simply clicking the links at the left that interest you. Each item has the information listed that you 
+will need to learn more about, or purchase, the item, including: a photograph, a description, the price, the location, and most importantly, 
+the contact information that you can use directly. You will find that some of the items listed will be located at our store in Leominster MA, 
+but others will be located at consignors stores or homes where you can arrange to see an item at a mutually convenient time. Have fun. 
+Shop around. Enjoy. 
+<A HREF="/buy" TARGET="main">(Details)</A>
+</TD>
+
+<TD WIDTH="50%" class="outer">
+
+{% if featured %}
+
+  <DIV CLASS="center2"><TABLE CLASS="center1" WIDTH="90%" HEIGHT=280 BORDER=5 CELLPADDING=0 CELLSPACING=1>
+  <TH COLSPAN=3>One of this month's featured items</TH><TR HEIGHT="10">
+  <TD WIDTH="33%" ALIGN="center">Item: \#{{ featured.id }}</TD><TD WIDTH="33%" CLASS="price">Available</TD><TD WIDTH="33%" ALIGN="center">Listed: {{ featured.startprice }}</TD></TR>
+  <TR HEIGHT="10"><TD WIDTH="33%" ALIGN="center">{{ categories }}</TD><TD WIDTH="33%" ALIGN="center">Located: {{ user.city }}, {{ user.state }}</TD><TD WIDTH="33%" ALIGN="center">Contact: <A HREF="mailto:{{ user.email }}">Email</A></TD></TR>
+  <TR><TD CLASS="img" WIDTH="100%" COLSPAN=3><A HREF="/details/{{ item.id }}"><IMG SRC="/pictures/{{ images[0].image }}" BORDER=1 HEIGHT="150"></A>
+  <BR><A HREF=/details/{{ item.id }}">{% ifequal images.count 1 %}Enlarge{% else %}More Photo's{% endif %}</A></TD></TR>
+  <TR><TD CLASS="desc" WIDTH="100%" COLSPAN=3>{{ featured.description }}</TD></TR>
+  </TABLE></DIV>
+  
+{% else %}
+
+Sorry!<BR>No Items Found
+
+{% endif %}
+
+</TD>
+
+<TD WIDTH="25%" class="main_1">
+<IMG SRC="{{ STATIC_URL }}images/new.gif"> New consignment <A HREF="/sell.html" TARGET="main">deals</A>.
+<br><br>
+<A HREF="/sell.html" TARGET="main">Consignors</A>, our new Mass Advertiser format makes it incredibly easy for you to list and sell your items without 
+the risks associated with the auction process. Here, you decide what price is fair and acceptable to you. You also decide what additional options and 
+services we can provide to best sell your item. You can talk to potential buyers directly, by email or by phone, or we can handle the details for you. 
+You can post multiple photo's or even choose to be listed on our homepage as one of our limited featured items like you see to the left. Best of all, 
+our rates are simple and affordable with a full one-year listing now starting at only \$50.
+<A HREF="/sell.html" TARGET="main">(Details)</A>
+</TD>
+</TR></TABLE>
+</BODY>
+</HTML>
+

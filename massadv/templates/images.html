@@ -1,0 +1,48 @@
+#!/usr/local/bin/perl
+
+use Carp;
+use strict;
+use CGI_Lite;
+
+# Dump the headers
+print "Content-type: text/html\n\n";
+
+# Use Formparse for Querystring variables
+#my $parsed = new FormParse;
+#$parsed->Parse();
+
+my $cgi = new CGI_Lite;
+$cgi->set_platform ('Unix');
+my %parsed = $cgi->parse_form_data;
+
+# See what action we're working on
+my $img1 = $parsed{img1} || &dump_error_page("No Input");
+my $img2 = $parsed{img2} || '';
+my $img3 = $parsed{img3} || '';
+my $img4 = $parsed{img4} || '';
+my $img5 = $parsed{img5} || '';
+
+print <<PAGE;
+
+<HTML>
+<HEAD>
+<TITLE></TITLE></TEST>
+<LINK REL="stylesheet" TYPE="text/css" HREF="{{ STATIC_URL }}main.css">
+</HEAD>
+<BODY>
+<H1> Photos </H1>
+<TABLE CELLSPACING=5 CELLPADDING=5 BORDER=0>
+
+PAGE
+
+print qq(<TR><TD CLASS="outer"><IMG SRC="/pictures/$img1" BORDER=0></TD></TR>) if($img1);
+print qq(<TR><TD CLASS="outer"><IMG SRC="/pictures/$img2" BORDER=0></TD></TR>) if($img2);
+print qq(<TR><TD CLASS="outer"><IMG SRC="/pictures/$img3" BORDER=0></TD></TR>) if($img3);
+print qq(<TR><TD CLASS="outer"><IMG SRC="/pictures/$img4" BORDER=0></TD></TR>) if($img4);
+print qq(<TR><TD CLASS="outer"><IMG SRC="/pictures/$img5" BORDER=0></TD></TR>) if($img5);
+
+print <<PAGE;
+</TABLE>
+</BODY>
+</HTML>
+

@@ -1,0 +1,52 @@
+A:link{color: #0000FF;}
+A:active{color: #0000FF;}
+A:visited{color: #0000FF;}
+
+TABLE, H1, H2, P, TD, TR, BODY {	
+					color:black;
+					font:12pt Helvetica; 
+					text-align:center; 
+					vertical-align:top; 
+					background:#FFFFFF;
+			}
+
+P {text-align:left; background:#CCCCCC;}
+
+H2 {color:red; font:18pt Helvetica;}
+
+TD.title {
+		font:24pt Helvetica;
+		color:red;
+}
+
+TD.add {
+        vertical-align:center;
+	text-align:left; 
+	background:#CCCCCC;
+}
+
+TD.add2 {
+	vertical-align:center;
+	text-align:center; 
+	background:#CCCCCC;
+}
+
+TD.add3 {
+	vertical-align:center;	
+	text-align:right;
+	color:blue; 
+	background:#CCCCFF;
+}
+
+TD.add4 {
+	vertical-align:center;	
+	text-align:right;
+	color:blue; 
+	background:#FFCCCC;
+}
+
+FORM {
+	vertical-align:center;	
+	text-align:left; 
+	background:#CCCCCC;
+}

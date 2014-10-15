@@ -1,0 +1,24 @@
+A:link{color: #CC0000;}
+A:active{color: #CC0000;}
+A:visited{color: #CC0000;}
+
+BODY, TABLE, H1, H2, P, TD, TR {text-align:center; vertical-align:center; background:#FFFFFF;}
+
+BODY {color:black; font:14pt Helvetica;}
+H1 {color:red; font:20pt Helvetica;}
+
+H2 {color:#CC0000; font:18pt Helvetica;}
+
+P  {color:Black;}
+
+TD {	color:black;
+	font:10pt Helvetica; 
+	background:#FFFFFF;
+}
+
+TD.menu {	
+	color:white;
+	font:10pt Helvetica;
+	font-weight: bold; 
+	background:#CCCCCC;
+}
